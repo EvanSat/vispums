@@ -70,7 +70,7 @@ def graph_veh():
 
 def graph_pt_pv():
     plt.subplot(2,2,4)
-    scplot = plt.scatter(valp_series,taxp_series,marker='o',s = df['WGTP'],c=df['MRGP'],vmax=5000, alpha=.3) ##################
+    scplot = plt.scatter(valp_series,taxp_series,marker='o',s = df['WGTP'],c=df['MRGP'],cmap='bwr',vmax=5000, alpha=.3) ##################
     plt.xlim([0, 1200000])
     plt.colorbar(scplot).ax.set_ylabel('First Mortgage Payment (Monthly $)', rotation=90)
     plt.title('Property Taxes vs. Property Values')
