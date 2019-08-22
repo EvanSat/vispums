@@ -73,7 +73,7 @@ def graph_pt_pv():
     scplot = plt.scatter(valp_series,taxp_series,marker='o',s = df['WGTP'],c=df['MRGP'],cmap='seismic',vmax=5000, alpha=.15) ##################
     plt.xlim([0, 1200000])
     plt.ylim([0, 10400])
-    plt.colorbar(scplot).ax.set_ylabel('First Mortgage Payment (Monthly $)', rotation=90)
+    plt.colorbar(scplot, ticks=[1250,2500,3750,5000]).ax.set_ylabel('First Mortgage Payment (Monthly $)', rotation=90)
     plt.title('Property Taxes vs. Property Values')
     plt.xlabel('Property Value ($)')
     plt.ylabel('Taxes ($)')
