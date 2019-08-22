@@ -77,6 +77,8 @@ def graph_pt_pv():
     plt.xlabel('Property Value ($)')
     plt.ylabel('Taxes ($)')
     plt.show()
+    
+    #Test
 
 def main():
     plt.figure(figsize=(18,10))
