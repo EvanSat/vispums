@@ -35,9 +35,9 @@ def graph_hhl():
 
 def graph_hincp():
     plt.subplot(2,2,2)
-    ##plt.title("Distribution of Household Income")
-    ##plt.ylabel("Density")
-    ##plt.xlabel("Household Income ($) - Log Scaled")
+    plt.title("Distribution of Household Income")
+    plt.ylabel("Density")
+    plt.xlabel("Household Income ($) - Log Scaled")
 
     #data = np.random.normal(size=10000)
     #data = pd.Series(hincp_series)
@@ -45,7 +45,7 @@ def graph_hincp():
     #plt.gca().set_xscale("log")
     #plt.show()
 
-    plt.plot(hincp_series, 'k--')
+    #plt.plot(hincp_series, 'k--')
 
     #x = pd.Series(hincp_series)
     #hist, bins, _ = plt.hist(hincp_series, bins=8)
@@ -54,9 +54,9 @@ def graph_hincp():
     #plt.hist(x, bins=logbins)
     #plt.xscale('log')
 
-
-    plt.hist(x=hincp_series) #ORIGINAL
-    plt.ylabel('Thousands of Households')
+    log_bins = np.logspace(1, 7, 100)
+    plt.hist(x=hincp_series, bins=log_bins) #ORIGINAL
+    
 
 
 def graph_veh():
