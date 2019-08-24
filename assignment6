@@ -27,7 +27,7 @@ counts_veh_series   = veh_series.value_counts()
 
 def graph_hhl():
     plt.subplot(2,2,1)
-    plt.pie(counts_hhl_series, startangle = 250)
+    plt.pie(counts_hhl_series, startangle = 242)
     plt.legend(counts_hhl_series.index, loc='upper left')
     plt.title("Household Languages")
     plt.ylabel('HHL')
