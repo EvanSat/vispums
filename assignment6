@@ -38,6 +38,7 @@ def graph_hincp():
     plt.title("Distribution of Household Income")
     plt.ylabel("Density")
     plt.xlabel("Household Income ($) - Log Scaled")
+    plt.xscale('log')
 
     #data = np.random.normal(size=10000)
     #data = pd.Series(hincp_series)
@@ -55,7 +56,8 @@ def graph_hincp():
     #plt.xscale('log')
 
     log_bins = np.logspace(1, 7, 100)
-    plt.hist(x=hincp_series, bins=log_bins) #ORIGINAL
+    plt.hist(hincp_series, bins=log_bins, color='g', alpha=.5, normed=True)
+    #plt.hist(x=hincp_series, bins=log_bins) #ORIGINAL
     
 
 
