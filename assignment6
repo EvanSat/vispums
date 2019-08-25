@@ -2,6 +2,7 @@ from pandas import DataFrame, Series
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import scipy.stats as stats
 
 
 data = pd.read_csv('./ss13hil.csv')
@@ -9,7 +10,7 @@ df = DataFrame(data)
 
 hhl_series          = Series(df['HHL']).replace({1:"English Only",2:"Spanish",3:"Other Indo-European Languages",4:"Asian and Pacific Island Languages", 5:"Other"})
 veh_series          = Series(df['VEH'].dropna())
-hincp_series        = Series(df['HINCP'])
+hincp_series        = Series(df['HINCP'].dropna())
 
     # Need array instead of series for Valp and Taxp to be able to use color maps.
     # https://stackoverflow.com/questions/44238796/convert-panda-series-into-numpy-array?rq=1
@@ -56,8 +57,13 @@ def graph_hincp():
     #plt.xscale('log')
 
     log_bins = np.logspace(1, 7, 100)
-    plt.hist(hincp_series, bins=log_bins, color='g', alpha=.5, normed=True)
+    #plt.hist(hincp_series, bins=log_bins, color='g', alpha=.5, normed=True)
     #plt.hist(x=hincp_series, bins=log_bins) #ORIGINAL
+    
+    density = stats.gaussian_kde(hincp_series)
+    n, x, _ = plt.hist(hincp_series, bins=log_bins, color='g', histtype=u'step', density=True)     
+    plt.plot(x, density(x), 'k--')                                                         
+    
     
 
 
