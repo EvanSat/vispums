@@ -1,3 +1,9 @@
+'''
+CPSC-51100, Summer 2019
+Names: Hani Ramahi, Evan Sabado
+PROGRAMMING ASSIGNMENT #6
+'''
+
 from pandas import DataFrame, Series
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,10 +17,6 @@ df = DataFrame(data)
 hhl_series          = Series(df['HHL']).replace({1:"English Only",2:"Spanish",3:"Other Indo-European Languages",4:"Asian and Pacific Island Languages", 5:"Other"})
 veh_series          = Series(df['VEH'].dropna())
 hincp_series        = Series(df['HINCP'].dropna())
-
-    # Need array instead of series for Valp and Taxp to be able to use color maps.
-    # https://stackoverflow.com/questions/44238796/convert-panda-series-into-numpy-array?rq=1
-    # Week 6 Lecture 2 @22:10
 
 valp_series         = Series(df['VALP'])
 taxp_series         = Series(df['TAXP']).replace({1:0,2:1,3:50,4:100,5:150,6:200,7:250,8:300,9:350,10:400,11:450,12:500,13:550,14:600,15:650,16:700,17:750,18:800,19:850,20:900,
@@ -40,32 +42,10 @@ def graph_hincp():
     plt.ylabel("Density")
     plt.xlabel("Household Income ($) - Log Scaled")
     plt.xscale('log')
-
-    #data = np.random.normal(size=10000)
-    #data = pd.Series(hincp_series)
-    #plt.hist(data, bins=np.logspace(np.log10(0.1), np.log10(1.0), 50))
-    #plt.gca().set_xscale("log")
-    #plt.show()
-
-    #plt.plot(hincp_series, 'k--')
-
-    #x = pd.Series(hincp_series)
-    #hist, bins, _ = plt.hist(hincp_series, bins=8)
-    #logbins = np.logspace(np.log10(bins[0]), np.log10(bins[-1]), len(bins))
-    #plt.subplot(212)
-    #plt.hist(x, bins=logbins)
-    #plt.xscale('log')
-
-    log_bins = np.logspace(1, 7, 100)
-    #plt.hist(hincp_series, bins=log_bins, color='g', alpha=.5, normed=True)
-    #plt.hist(x=hincp_series, bins=log_bins) #ORIGINAL
-    
+    log_bins = np.logspace(1, 7, 100) 
     density = stats.gaussian_kde(hincp_series)
     n, x, _ = plt.hist(hincp_series, bins=log_bins, color='g', histtype=u'step', density=True)     
-    plt.plot(x, density(x), 'k--')                                                         
-    
-    
-
+    plt.plot(x, density(x), 'k--')                                                          
 
 def graph_veh():
     plt.subplot(2,2,3)
