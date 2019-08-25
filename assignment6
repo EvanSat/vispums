@@ -10,14 +10,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
 
-
 data = pd.read_csv('./ss13hil.csv')
 df = DataFrame(data)
 
 hhl_series          = Series(df['HHL']).replace({1:"English Only",2:"Spanish",3:"Other Indo-European Languages",4:"Asian and Pacific Island Languages", 5:"Other"})
-veh_series          = Series(df['VEH'].dropna())
 hincp_series        = Series(df['HINCP'].dropna())
-
 valp_series         = Series(df['VALP'])
 taxp_series         = Series(df['TAXP']).replace({1:0,2:1,3:50,4:100,5:150,6:200,7:250,8:300,9:350,10:400,11:450,12:500,13:550,14:600,15:650,16:700,17:750,18:800,19:850,20:900,
                                                     21:950,22:1000,23:1100,24:1200,25:1300,26:1400,27:1500,28:1600,29:1700,30:1800,31:1900,32:2000,33:2100,34:2200,35:2300,36:2400,
@@ -25,8 +22,6 @@ taxp_series         = Series(df['TAXP']).replace({1:0,2:1,3:50,4:100,5:150,6:200
                                                     53:4100,54:4200,55:4300,56:4400,57:4500,58:4600,59:4700,60:4800,61:4900,62:5000,63:5500,64:6000,65:7000,66:8000,67:9000,68:10000})
 
 counts_hhl_series   = hhl_series.value_counts()
-counts_veh_series   = veh_series.value_counts()
-
 
 def graph_hhl():
     plt.subplot(2,2,1)
@@ -49,12 +44,14 @@ def graph_hincp():
 
 def graph_veh():
     plt.subplot(2,2,3)
-    x_axis = counts_veh_series.index
-    y_axis = counts_veh_series
-    plt.bar(x_axis, y_axis,color='red')
-    plt.title('Vehicles Available in Households')
-    plt.xlabel('# of Vehicles')
-    plt.ylabel('Thousands of Households')
+    veh_data = (df.groupby('VEH')['WGTP'].sum())/1000
+    plt.bar(veh_data.index, veh_data.values,color='red')
+    plt.xticks(veh_data.index)
+    plt.tick_params(axis="both", which="major")
+    plt.tick_params(axis="both", which="minor")
+    plt.ylabel("Thousands of Households")
+    plt.xlabel("# of Vehicles")
+    plt.title("Vehicles Available in Households")
 
 def graph_pt_pv():
     plt.subplot(2,2,4)
@@ -65,8 +62,6 @@ def graph_pt_pv():
     plt.title('Property Taxes vs. Property Values')
     plt.xlabel('Property Value ($)')
     plt.ylabel('Taxes ($)')
-    plt.show()
-    
 
 def main():
     plt.figure(figsize=(18,10))
