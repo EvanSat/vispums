@@ -44,7 +44,7 @@ def graph_hincp():
     plt.xscale('log')
     log_bins = np.logspace(1, 7, 100) 
     density = stats.gaussian_kde(hincp_series)
-    n, x, _ = plt.hist(hincp_series, bins=log_bins, color='g', histtype=u'step', density=True)     
+    n, x, _ = plt.hist(hincp_series, bins=log_bins, color='g', histtype='bar', alpha=.5, density=True)     
     plt.plot(x, density(x), 'k--')                                                          
 
 def graph_veh():
